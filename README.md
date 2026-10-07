@@ -118,6 +118,8 @@ opswatch/
 
 ## Roadmap
 
+See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the push-by-push plan and timeline.
+
 - [x] **M1: Core loop.** Agent checks → API → deduplicated tickets → webhook alerts
 - [ ] **M2: Hardening.**
   - Alembic migrations

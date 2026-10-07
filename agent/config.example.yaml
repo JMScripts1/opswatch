@@ -1,0 +1,17 @@
+# Copy to config.yaml (git-ignored) and edit for this machine.
+server_url: http://localhost:8000
+agent_token: change-me-too   # must match AGENT_TOKEN in the server's .env
+# hostname: my-laptop        # defaults to the machine's hostname
+interval_seconds: 300
+
+checks:
+  disk:
+    warn_pct: 80
+    crit_pct: 90
+  services:                  # systemd unit names (Linux) or service names (Windows)
+    - ssh
+  backups:                   # alert if newest file in folder is older than ~1 day
+    - /var/backups
+  certs:                     # alert when TLS certs are close to expiry
+    - github.com
+  updates: true

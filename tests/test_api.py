@@ -21,6 +21,23 @@ def test_rejects_bad_token(client):
     assert r.status_code == 401
 
 
+def test_rejects_token_prefix(client):
+    r = client.post("/api/v1/reports", headers={"X-Agent-Token": "test-"},
+                    json={"hostname": "x", "checks": []})
+    assert r.status_code == 401
+
+
+def test_rejects_non_ascii_token_without_crashing(client):
+    r = client.post("/api/v1/reports", headers={"X-Agent-Token": "tëst-token".encode()},
+                    json={"hostname": "x", "checks": []})
+    assert r.status_code == 401
+
+
+def test_rejects_missing_token(client):
+    r = client.post("/api/v1/reports", json={"hostname": "x", "checks": []})
+    assert r.status_code == 422
+
+
 def test_problem_opens_one_ticket_then_auto_resolves(client):
     r1 = report(client, "warn", "85% used")
     assert len(r1.json()["opened"]) == 1

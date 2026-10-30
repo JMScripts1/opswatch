@@ -122,6 +122,7 @@ See [`docs/ROADMAP.md`](docs/ROADMAP.md) for the push-by-push plan and timeline.
 
 - [x] **M1: Core loop.** Agent checks → API → deduplicated tickets → webhook alerts
 - [ ] **M2: Hardening.**
+  - ✅ Constant-time agent token comparison
   - Alembic migrations
   - A token per agent instead of one shared secret
   - HTTPS through a Caddy reverse proxy

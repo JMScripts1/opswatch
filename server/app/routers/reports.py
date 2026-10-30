@@ -1,3 +1,5 @@
+import secrets
+
 from fastapi import APIRouter, Depends, Header, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -13,7 +15,9 @@ router = APIRouter(prefix="/api/v1", tags=["agent"])
 
 
 def require_agent_token(x_agent_token: str = Header(...)) -> None:
-    if x_agent_token != settings.agent_token:
+    # Constant-time compare so response timing can't leak how much of the token matched.
+    # Compare bytes: compare_digest raises TypeError on non-ASCII str.
+    if not secrets.compare_digest(x_agent_token.encode(), settings.agent_token.encode()):
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Invalid agent token")
 
 

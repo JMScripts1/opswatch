@@ -15,13 +15,13 @@ Status: ✅ done · 🔨 in progress · ⬜ not started
 
 ---
 
-## M2: Hardening (Oct 8 – Oct 26)
+## M2: Hardening 🔨 (Oct 8 – Nov 16, slid back)
 Goal: make it something you could safely run on a real network.
 
 | # | Push | Target | ⏱ | Notes |
 |---|------|--------|---|-------|
 | 2.1 | **Run it for real.** `make up`, run the agent on your Windows PC, seed demo data, fix anything that breaks on Windows | Oct 10 | 2h | 🧠 First-hand bugs make the best interview stories. Write them down. |
-| 2.2 | **Constant-time token check.** Switch `!=` to `secrets.compare_digest`, with a test | Oct 11 | 30m | Small security fix that's easy to explain |
+| 2.2 | ✅ **Constant-time token check.** Switch `!=` to `secrets.compare_digest`, with a test | Oct 11 | 30m | Small security fix that's easy to explain |
 | 2.3 | **Alembic migrations.** Replace `create_all`, add the initial migration, run migrations on container start | Oct 15 | 3h | Learn why schema changes need migrations |
 | 2.4 | **Per-agent tokens.** New `agents` table with a hashed token for each host, a `POST /api/v1/agents` enroll endpoint, and revoking | Oct 19 | 4h | 🧠 Hash with `hashlib.sha256` and look up by prefix. Design the table yourself first. |
 | 2.5 | **Offline-host detection.** A scheduled job opens a `heartbeat` ticket when `last_seen` is more than 3× the interval | Oct 22 | 2h | 🧠 Reuses the rules engine, so it's a good test of whether you understand it |
